@@ -20,4 +20,6 @@ from support import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('sign-up/', views.signup, name="signup"),
+    path('sign-in/', views.signin, name="signin"),
 ]

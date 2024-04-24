@@ -41,3 +41,14 @@ def signin(request):
                 return render(request, "sign-in.html", context)
     else:
         return render(request, "sign-in.html")
+    
+def home(request):
+    return render(request, "index.html")
+
+def about(request):
+    return render(request, "about.html")
+
+def contact(request):
+    return render(request, "contact.html")
+
+

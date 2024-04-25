@@ -4,6 +4,10 @@ from support.models import User, ServiceRequest
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Create your views here.
 def signup(request):
@@ -57,15 +61,18 @@ def user_name(request):
 def home(request):
     return render(request, "index.html")
 
+@login_required
 def service(request):
     if request.user.is_authenticated and  request.method == "POST":
+        user_id = request.user
         name = request.POST["uname"]
         email = request.POST["uemail"]
         phone = request.POST["uphone"]
         service = request.POST["uservice"]
         msg = request.POST["umessage"]
-        m = ServiceRequest.objects.create(name = name, email = email, phone_number= phone, message = msg, service = service)
-        plain_message = "working"
+        m = ServiceRequest.objects.create( user_id=user_id , name = name, email = email, phone_number= phone, message = msg, service = service)
+        status = m.status
+        plain_message = f"name: {name}\n\n email: {email}\n\n phone: {phone}\n\n Service requested: {service}\n\nMessage: {msg}\n\n Status: {status}"
         send_mail(
             'GasCare',
             plain_message,
@@ -74,7 +81,19 @@ def service(request):
             fail_silently=False,
         )
         m.save()
-        return HttpResponse("Done!!")
+        return redirect('home')
+    
+@receiver(post_save, sender=ServiceRequest)
+def send_status_change_notification(sender, instance, **kwargs):
+    if instance.status == 'Resolved':
+        subject = f"Service status is Resolved"
+        message = f"Dear {instance.name}, your request for the service of {instance.service}\n\nYour service request has been resolved."
+        from_email = 'thakurkaustubh37@gmail.com'
+        recipient_list = [instance.email]
+        send_mail(subject, message, from_email, recipient_list)
 
-
-
+def service_view(request):
+    # Filter ServiceRequest objects based on the currently logged-in user's user_id
+    service_requests = ServiceRequest.objects.filter(user_id=request.user.id)
+    print(service_requests)  # Print the queryset for debugging purposes
+    return render(request, 'status.html', {'service_requests': service_requests})

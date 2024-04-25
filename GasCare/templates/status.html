@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Service Status</title>
+</head>
+<body>
+    <h1>Service Status</h1>
+    <table border="1">
+        <tr>
+            <th>User</th>
+            <th>Service</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Updated Status</th>
+        </tr>
+        {% for request in service_requests %}
+        <tr>
+            <td>{{request.user_id.username}}</td>
+            <td>{{request.service}}</td>
+            <td>{{request.submission_datetime}}</td>
+            <td>{{ request.status }}</td>
+            <td>{{request.resolved_datetime}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

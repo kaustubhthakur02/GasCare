@@ -98,7 +98,7 @@
                   <a class="nav-link" href="{% url 'home'%}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="">Track Services</a>
+                  <a class="nav-link" href="{% url 'status' %}">Track Services</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'logout'%}">
@@ -262,7 +262,7 @@
             <div class="heading_container heading_center">
               <h2>Get In Touch</h2>
             </div>
-            <form method="post" action="{% url 'service' %}">
+            <form id="serviceForm" method="post" action="{% url 'service' %}" onsubmit="return submitForm(event)">
               {% csrf_token %}
               <div class="form-row">
                   <div class="form-group col">
@@ -293,7 +293,7 @@
                   </div>
               </div>
               <div class="btn_box">
-                  <button type="submit" value="Submit">SEND</button>
+                  <button type="submit" value="Submit" id="submit">SEND</button>
               </div>
           </form>
           </div>
@@ -422,6 +422,12 @@
   <!-- Google Map -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
   <!-- End Google Map -->
+  <script>
+    function submitForm(event) {
+        alert(" Thankyou, Your form has been submitted!");
+        event.target.submit();
+    }
+    </script>
 </body>
 
 </html>

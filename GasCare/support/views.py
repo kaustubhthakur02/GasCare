@@ -1,6 +1,9 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth import authenticate,login,logout
-from support.models import User
+from support.models import User, ServiceRequest
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 # Create your views here.
 def signup(request):
@@ -54,6 +57,24 @@ def user_name(request):
 def home(request):
     return render(request, "index.html")
 
+def service(request):
+    if request.user.is_authenticated and  request.method == "POST":
+        name = request.POST["uname"]
+        email = request.POST["uemail"]
+        phone = request.POST["uphone"]
+        service = request.POST["uservice"]
+        msg = request.POST["umessage"]
+        m = ServiceRequest.objects.create(name = name, email = email, phone_number= phone, message = msg, service = service)
+        plain_message = "working"
+        send_mail(
+            'GasCare',
+            plain_message,
+            'thakurkaustubh37@gmail.com',
+            [m.email],
+            fail_silently=False,
+        )
+        m.save()
+        return HttpResponse("Done!!")
 
 
 

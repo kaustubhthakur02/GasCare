@@ -4,9 +4,9 @@ from  django.contrib.auth.models import User
 
 class ServiceRequest(models.Model):
     SERVICE_CHOICES = (
-        ('gas_booking', 'Gas Booking'),
-        ('new_connection', 'New Connection'),
-        ('customer_support', 'Customer Support'),
+        ('Gas Booking', 'Gas Booking'),
+        ('New Connection', 'New Connection'),
+        ('Customer Support', 'Customer Support'),
     )
 
     STATUS_CHOICES = (

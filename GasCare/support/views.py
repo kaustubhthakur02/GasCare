@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth import authenticate,login,logout
 from support.models import User
 
@@ -26,8 +26,8 @@ def signup(request):
 def signin(request):
     context = {}
     if request.method == "POST":
-        nm = request.POST["uname"] # Using get() method to avoid errors
-        pw = request.POST["upassword"]  # Using get() method to avoid errors
+        nm = request.POST["uname"]
+        pw = request.POST["upassword"]  
         if nm == "" or pw == "":
             context['errmsg'] = "Fields cannot be Empty"
             return render(request, "sign-in.html", context)
@@ -35,20 +35,25 @@ def signin(request):
             user = authenticate(username=nm, password=pw)
             if user is not None:
                 login(request, user)
-                return HttpResponse("Logged in successfully!")
+                return redirect('home')
             else:
                 context["errmsg"] = "Invalid Username and password"
                 return render(request, "sign-in.html", context)
     else:
         return render(request, "sign-in.html")
     
+def user_logout(request):
+    print(request.user)
+    logout(request)
+    return redirect('/signin/')
+
+def user_name(request):
+    user = request.user
+    return render (request, "index.html", user)
+    
 def home(request):
     return render(request, "index.html")
 
-def about(request):
-    return render(request, "about.html")
 
-def contact(request):
-    return render(request, "contact.html")
 
 

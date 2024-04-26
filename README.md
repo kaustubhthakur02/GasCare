@@ -17,6 +17,9 @@ Upon submission of the contact form, users are promptly notified via email and m
 **Service Tracking:**  
 GasCare enables users to conveniently track the status of their service requests directly on the website. They can access detailed information such as the type of service requested and the submission date and time.
 
+**Technologies Used:**
+MySQL, HTML, CSS, Twilio, JavaScript, Python
+
 **Service Deletion:**  
 Users have the flexibility to delete service requests if the status is "In Progress," providing them with control over their requests until they are resolved.
 

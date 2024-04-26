@@ -1,6 +1,8 @@
 from django.db import models
 from  django.contrib.auth.models import User
-import datetime
+from datetime import datetime
+
+
 # Create your models here.
 
 
@@ -24,7 +26,7 @@ class ServiceRequest(models.Model):
     message = models.TextField()
     submission_datetime = models.DateTimeField(auto_now_add=True)
     resolved_datetime = models.DateTimeField(null=True, blank=True)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='in_progress')
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='In Progress')
     def __str__(self):
         return f"Service Request {self.pk} - User:{self.user_id.username}"
 

@@ -9,4 +9,5 @@ urlpatterns = [
     path('',views.home, name="home"),
     path('service/', views.service, name="service"),
     path('status/', views.service_view, name="status"),
+    path('delete/<dreq>', views.deleterequest, name="delete"),
 ]

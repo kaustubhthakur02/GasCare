@@ -1,28 +1,356 @@
 <!DOCTYPE html>
-<html lang="en">
+{% load static %}
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>Service Status</title>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <link rel="shortcut icon" href="" type="image/x-icon">
+  <title>Home</title>
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'C:\Users\hp\Documents\GitHub\GasCare\GasCare\static\css\second\bootstrap.css'%}" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <!--owl slider stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  <!-- nice select -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha256-mLBIhmBvigTFWPSCtvdu6a76T+3Xyt+K571hupeFLg4=" crossorigin="anonymous" />
+  <!-- font awesome style -->
+  <link href="{% static 'C:\Users\hp\Documents\GitHub\GasCare\GasCare\static\fonts\font-awesome.min.css'%}" rel="stylesheet" />
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'C:\Users\hp\Documents\GitHub\GasCare\GasCare\static\css\second\style.css'%}" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="{% static 'C:\Users\hp\Documents\GitHub\GasCare\GasCare\static\css\second\responsive.css'%}" rel="stylesheet" />
+
+  <style>
+    body {
+      background-color: #f5f5f5;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    .hero_area {
+      text-align: center;
+    }
+
+    .hero_bg_box img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .info-section {
+      margin-top: 50px;
+      color: #333;
+    }
+
+    .service-request-box {
+      margin: 20px;
+      padding: 30px;
+      border-radius: 10px;
+      background-color: #ffffff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .service-request-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .service-request-box h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .service-request-box h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .resolved {
+      color: #28a745;
+    }
+
+    .in-progress {
+      color: #ffc107;
+    }
+    .delete-button {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: darkred;
+}
+  </style>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <link rel="shortcut icon" href="" type="image/x-icon">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'C:\Users\hp\Documents\GitHub\GasCare\GasCare\static\css\second\bootstrap.css'%}" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <!--owl slider stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  <!-- nice select -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha256-mLBIhmBvigTFWPSCtvdu6a76T+3Xyt+K571hupeFLg4=" crossorigin="anonymous" />
+  <!-- font awesome style -->
+  <link href="{% static 'C:\Users\hp\Documents\GitHub\GasCare\GasCare\static\fonts\font-awesome.min.css'%}" rel="stylesheet" />
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'C:\Users\hp\Documents\GitHub\GasCare\GasCare\static\css\second\style.css'%}" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="{% static 'C:\Users\hp\Documents\GitHub\GasCare\GasCare\static\css\second\responsive.css'%}" rel="stylesheet" />
 </head>
+
 <body>
-    <h1>Service Status</h1>
-    <table border="1">
-        <tr>
-            <th>User</th>
-            <th>Service</th>
-            <th>Date</th>
-            <th>Status</th>
-            <th>Updated Status</th>
-        </tr>
-        {% for request in service_requests %}
-        <tr>
-            <td>{{request.user_id.username}}</td>
-            <td>{{request.service}}</td>
-            <td>{{request.submission_datetime}}</td>
-            <td>{{ request.status }}</td>
-            <td>{{request.resolved_datetime}}</td>
-        </tr>
-        {% endfor %}
-    </table>
+  <div class="hero_area">
+    <div class="hero_bg_box">
+      <img src="{% static '\images\second\flame-gas-gas-flame-blue.jpg'%}" alt="">
+    </div>
+    <!-- header section strats -->
+    <header class="header_section">
+        <div class="header_top">
+          <div class="container-fluid header_top_container">
+  
+            <div class="contact_nav">
+              <a href="">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                <span>
+                  Pune
+                </span>
+              </a>
+              <a href="">
+                <i class="fa fa-phone" aria-hidden="true"></i>
+                <span>
+                  Call : 9156748282
+                </span>
+              </a>
+              <a href="">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <span>
+                  gascare@gmail.com
+                </span>
+              </a>
+            </div>
+            <div class="social_box">
+              <a href="">
+                <i class="fa fa-facebook" aria-hidden="true"></i>
+              </a>
+              <a href="">
+                <i class="fa fa-twitter" aria-hidden="true"></i>
+              </a>
+              <a href="">
+                <i class="fa fa-linkedin" aria-hidden="true"></i>
+              </a>
+              <a href="">
+                <i class="fa fa-instagram" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="header_bottom">
+          <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg custom_nav-container ">
+              <a class="navbar-brand " href="{% url 'home'%}">GasCare</a>
+              
+  
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class=""> </span>
+              </button>
+  
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav  ">
+                  <li class="nav-item">
+                    <p class="nav-link"> Hello <b>"{{user}}"</b></p>
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'home'%}">Home <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'status' %}">Track Services</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout'%}">
+                      <i class="fa fa-user" aria-hidden="true"></i>
+                      <span>
+                        Logout
+                      </span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'signup'%}">
+                      <i class="fa fa-user" aria-hidden="true"></i>
+                      <span>
+                        Register
+                      </span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </header>
+    <header class="header_section">
+      <!-- Header content goes here -->
+    </header>
+    <div class="info-section">
+      <div class="container">
+        <div class="row">
+          {% for i in service_requests %}
+          <div class="col-md-6 col-lg-4">
+            <div class="service-request-box">
+              <h3> <span style="font-weight:bolder;"> Service Request:</span> <br> {{ i.service }}</h3><br>
+              <h3> <span style="font-weight:bolder;">Service Request Date:</span> <br> {{ i.submission_datetime }}</h3><br>
+              <h3 class="{% if i.status == 'Resolved' %}resolved{% else %}in-progress{% endif %}"> <span style="color: rgb(51, 51, 51); font-weight: bolder;">User Status:</span> {{ i.status }}</h3><br>
+              <h3>Status Resolved Date: <br>{{ i.resolved_datetime }}</h3> 
+              {% if i.status == 'In Progress' %}
+              <form action="{% url 'delete' i.id %}" method="post"><br>
+                {% csrf_token %}
+                <button type="submit" class="delete-button">Delete Service</button>
+              </form>
+              {% endif %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <section class="info_section ">
+    <div class="container">
+      <div class="info_top">
+        <div class="row">
+          <div class="col-md-3 ">
+            <a class="navbar-brand" href="index.html">
+              GasCare
+            </a>
+          </div>
+          <div class="col-md-5 ">
+            <div class="info_contact">
+              <a href="">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                <span>
+                  Pune
+                </span>
+              </a>
+              <a href="">
+                <i class="fa fa-phone" aria-hidden="true"></i>
+                <span>
+                  9156748282
+                </span>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-4 ">
+            <div class="social_box">
+              <a href="">
+                <i class="fa fa-facebook" aria-hidden="true"></i>
+              </a>
+              <a href="">
+                <i class="fa fa-twitter" aria-hidden="true"></i>
+              </a>
+              <a href="">
+                <i class="fa fa-linkedin" aria-hidden="true"></i>
+              </a>
+              <a href="">
+                <i class="fa fa-instagram" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="info_bottom">
+        <div class="row">
+          <div class="col-lg-3 col-md-6">
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="info_detail">
+              <h5>
+                Services
+              </h5>
+              <p>
+                1. Gas Booking <br>
+                2. New Connection <br>
+                3. Customer Support <br>
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <div class="">
+              <h5>
+                Useful links
+              </h5>
+              <ul class="info_menu">
+                <li>
+                  <a href="{% url 'home'%}">
+                    Home
+                  </a>
+                </li>
+                <li>
+                </li>
+                <li class="mb-0">
+                  <a href="{% url 'status'%}">
+                    Track Services
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end info_section -->
+
+  <!-- footer section -->
+  <footer class="footer_section">
+    <div class="container">
+      <p>
+        &copy; <span id="displayYear"></span> All Rights Reserved By
+        GasCare
+      </p>
+    </div>
+  </footer>
+  <script src="{% static 'C:\Users\hp\Documents\GitHub\GasCare\GasCare\static\js\jquery-3.4.1.min.js'%}"></script>
+  <!-- popper js -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <!-- bootstrap js -->
+  <script src="{% static 'C:\Users\hp\Documents\GitHub\GasCare\GasCare\static\js\bootstrap.js'%}"></script>
+  <!-- owl slider -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <!-- nice select -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js" integrity="sha256-Zr3vByTlMGQhvMfgkQ5BtWRSKBGa2QlspKYJnkjZTmo=" crossorigin="anonymous"></script>
+  <!-- custom js -->
+  <script src="{% static 'C:\Users\hp\Documents\GitHub\GasCare\GasCare\static\js\custom.js'%}"></script>
+  <!-- Google Map -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
+  <!-- End Google Map -->
 </body>
 </html>

@@ -62,6 +62,9 @@ def user_name(request):
 def home(request):
     return render(request, "index.html")
 
+account_sid = ''
+auth_token = ''
+client = Client(account_sid, auth_token)
 
 @login_required
 def service(request):

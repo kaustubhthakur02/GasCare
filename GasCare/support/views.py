@@ -26,7 +26,7 @@ def signup(request):
             try:
                 u = User.objects.create_user(username=uname, email=uemail, password=upassword)
                 u.save()
-                return HttpResponse("Done!!")
+                return redirect('signin')
             except Exception:
                 context["error"] = "User already exists"
     return render(request, "sign-up.html", context)
@@ -62,9 +62,9 @@ def user_name(request):
 def home(request):
     return render(request, "index.html")
 
-account_sid = 'ACbfed8c1c91885dd1d48676eefeb41fa2'
-auth_token = 'd5a830829dae4f195475e38c30ce699d'
-client = Client(account_sid, auth_token)
+# account_sid = 'ACbfed8c1c91885dd1d48676eefeb41fa2'
+# auth_token = 'd5a830829dae4f195475e38c30ce699d'
+# client = Client(account_sid, auth_token)
 
 @login_required
 def service(request):
